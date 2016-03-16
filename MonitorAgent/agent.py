@@ -40,7 +40,6 @@ def collect():
 
     # If it's the last minute of the day, generate images
     now = datetime.now()
-    draw_images(data_filename)
     if now.hour == 23 and now.minute == 59:
         draw_images(data_filename)
 
