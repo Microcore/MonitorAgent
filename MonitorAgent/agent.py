@@ -24,7 +24,6 @@ def collect():
         time.time(),
         cpu,
         cpu_t.user,
-        cpu_t.nice,
         cpu_t.system,
         cpu_t.idle,
         memory.percent,
@@ -50,17 +49,17 @@ def draw_images(filename):
     # Draw memory and SWAP percentage line charts
     # Draw network line charts
     timestamps = []
-    cpu, cpu_u, cpu_n, cpu_s, cpu_i = [], [], [], [], []
+    cpu, cpu_u, cpu_s, cpu_i = [], [], [], []
     memory, swap, net_s, net_r = [], [], [], []
     process = []
     datas = (
-        timestamps, cpu, cpu_u, cpu_n, cpu_s, cpu_i,
+        timestamps, cpu, cpu_u, cpu_s, cpu_i,
         memory, swap, net_s, net_r, process,
     )
     with open(filename, 'r') as rf:
         csv_data = csv.reader(rf)
         for row in csv_data:
-            for i in range(11):
+            for i in range(10):
                 datas[i].append(float(row[i]))
     groups = {
         'CPU percent': {
@@ -68,7 +67,6 @@ def draw_images(filename):
         },
         'CPU times percent': {
             'User': cpu_u,
-            'Nice': cpu_n,
             'System': cpu_s,
             'Idle': cpu_i,
         },
