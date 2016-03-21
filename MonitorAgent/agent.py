@@ -7,8 +7,22 @@ import json
 import sys
 import time
 
+from docopt import docopt
 import psutil
 import pygal
+
+__doc__ = '''
+Monitor Agent.
+
+Usage:
+  agent.py collect
+  agent.py draw
+
+Options:
+  -h --help    Show this screen.
+  --version    Show version and exit.
+'''
+__version__ = '0.0.2'
 
 
 def collect():
@@ -99,6 +113,14 @@ def get_data_filename():
     )
 
 
+def main():
+    args = docopt(__doc__, version='Monitor Agent {}'.format(__version__))
+    if args.get('collect', False):
+        collect()
+    if args.get('draw', False):
+        draw_images(get_data_filename())
+
+
 if __name__ == '__main__':
-    collect()
+    main()
 
